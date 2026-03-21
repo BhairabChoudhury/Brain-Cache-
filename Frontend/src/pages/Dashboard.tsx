@@ -8,7 +8,6 @@ import {Card }   from '../components/ui/Card'
 import { CreateContentModel } from '../components/ui/CreateContentModel'
 //import { useState } from 'react'
 import { Sidebar } from '../components/ui/Sidebar.tsx'
-import { BACKEND_URL } from '../config.ts'
  import {useContent} from "../hooks/useContent.tsx"
   // import { title } from 'process'
  import axios from 'axios' 
