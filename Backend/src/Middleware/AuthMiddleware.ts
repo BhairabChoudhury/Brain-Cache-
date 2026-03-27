@@ -1,7 +1,6 @@
 import express , {NextFunction , Request , Response } from 'express' ; 
 import jwt from  "jsonwebtoken" ; 
 
-   
 const JWT_TOKEN = process.env.JWT_TOKEN  as string ; 
 
 export const UserMiddleware = async (req : Request , res : Response , next : NextFunction )=>{
@@ -16,7 +15,8 @@ export const UserMiddleware = async (req : Request , res : Response , next : Nex
         req.userId = decoded.id  ;
         next() ;
         
-    }catch(err){
+    }
+    catch(err){
         console.log(err) ; 
         res.status(401).json({"message" :"Unothorized User"})
     }
