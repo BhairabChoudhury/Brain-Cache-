@@ -1,23 +1,23 @@
 
 
 // Exporting a function named `random` that generates a random string of a given length.
- export function random(len: number) {
-    // Define a string containing possible characters for the random string.
-    let options = "erdctfbghujmrdtfbghunjmrxctfvygbhun";
-    let length = options.length;
+//  export function random(len: number) {
+//     // Define a string containing possible characters for the random string.
+//     let options = "erdctfbghujmrdtfbghunjmrxctfvygbhun";
+//     let length = options.length;
 
-    // Initialize an empty string to store the result.
-    let ans = "";
+//     // Initialize an empty string to store the result.
+//     let ans = "";
 
-    // Loop `len` times to construct the random string.
-    for (let i = 0; i < len; i++) {
-        // Generate a random index and append the corresponding character from `options` to `ans`.
-        ans += options[Math.floor(Math.random() * length)];
-    }
+//     // Loop `len` times to construct the random string.
+//     for (let i = 0; i < len; i++) {
+//         // Generate a random index and append the corresponding character from `options` to `ans`.
+//         ans += options[Math.floor(Math.random() * length)];
+//     }
 
-    // Return the final random string.
-    return ans;
-}
+//     // Return the final random string.
+//     return ans;
+// }
 
 /*
 Notes:
@@ -29,7 +29,7 @@ Notes:
 */
 // Importing required types and modules from "express" and "jsonwebtoken".
 import { NextFunction, Request, Response } from "express";
-import { JWT} from "./config"; // Importing the JWT secret key from a configuration file.
+// import { JWT} from "./config"; // Importing the JWT secret key from a configuration file.
 import jwt from "jsonwebtoken"; // Importing the jsonwebtoken library for token verification.
 
 // Middleware to validate user authentication using a JWT token.
