@@ -8,7 +8,7 @@ const JWT_TOKEN = process.env.JWT_TOKEN as string ;
 export const signup = async (req : Request , res : Response ) =>{ 
     try {
   const { username , email , password} = req.body ; 
-    if(!username  || ! email || !password) {
+    if(!username || ! email || !password) {
          return res.status(400).json({"message" : "All fields required"}) ; 
     } 
     const user = await UserModel.findOne(email) ; 
