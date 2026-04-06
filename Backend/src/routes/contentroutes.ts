@@ -5,6 +5,6 @@ import { UserMiddleware } from "../Middleware/AuthMiddleware" ;
 const router = express.Router() ; 
 
 router.post("/create" , upload.single("file") , UserMiddleware , ) ; 
-router.get("/get" , UserMiddleware ) ;
+router.get("/get", UserMiddleware ) ;
 
 export default router ;  
