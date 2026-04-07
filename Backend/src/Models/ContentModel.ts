@@ -5,7 +5,7 @@ export interface IContent extends Document{
     type : "note" | "link" | "pdf" | "image" ;
     content?:string ;
     url?:string ;
-    file?:string ; 
+    fileUrl?:string ; 
     extractedText?:string ;  
     userId :mongoose.Schema.Types.ObjectId;
     createdAt:Date ;
@@ -16,7 +16,7 @@ const ContentSchema = new Schema<IContent>({
   type :{ type :String , enum:["note","link","pdf","image"] , required:true} ,
   content :{ type :String  } ,
   url :{ type :String  } ,
-  file :{ type :String  } ,
+  fileUrl :{ type :String  } ,
   extractedText :{ type :String  } , 
   userId :{ type :mongoose.Schema.Types.ObjectId , ref:"User" , required:true} 
 }, {
