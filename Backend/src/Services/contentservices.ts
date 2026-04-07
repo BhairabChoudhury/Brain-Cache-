@@ -1,7 +1,7 @@
 import ContentModel from "../Models/ContentModel";
 // Assume you have some file upload + text extraction utils
 import { extractTextFromPDF } from "../utils/pdf";
-// import { uploadFile } from "../utils/upload";
+import { extractTextFromImage } from "../utils/orc";
 
 // 🔵 Mock Chroma function (you will replace later)
 const addToVectorDB = async (text: string, contentId: string) => {
@@ -54,8 +54,8 @@ export const createContent = async (data: CreateContentInput) => {
     // fileUrl = await uploadFile(file);
     fileUrl = `/uploads/${file.originalname}`;
 
-    // OCR later
-    extractedText = "Image OCR text (future)";
+    // OCR 
+    extractedText = await extractTextFromImage(file.path) ; 
   }
 
   else {
