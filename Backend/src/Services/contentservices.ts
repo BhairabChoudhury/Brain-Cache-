@@ -74,7 +74,7 @@ export const createContent = async (data: CreateContentInput) => {
 
   // 🤖 Send to Vector DB (Chroma)
   if (extractedText) {
-    await addToVectorDB(extractedText, newContent._id.toString()); //  send  text and id  of contend to vector db  
+    await addToVectorDB(extractedText, String(newContent._id)); //  send  text and id  of contend to vector db  
   }
 
   return newContent;

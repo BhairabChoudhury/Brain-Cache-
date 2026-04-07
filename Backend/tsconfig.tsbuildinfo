@@ -1,1 +1,1 @@
-{"root":["./src/db.ts","./src/index.ts","./src/middleware.ts"],"version":"5.9.3"}
+{"root":["./src/index.ts","./src/config/db.ts","./src/middleware/authmiddleware.ts","./src/middleware/uploadmiddleware.ts","./src/models/contentmodel.ts","./src/models/usermodel.ts","./src/services/contentservices.ts","./src/controllers/authcontroller.ts","./src/controllers/contentcontrollers.ts","./src/routes/authroutes.ts","./src/routes/contentroutes.ts","./src/utils/orc.ts","./src/utils/pdf.ts"],"version":"5.9.3"}
