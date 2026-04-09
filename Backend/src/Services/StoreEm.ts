@@ -11,4 +11,5 @@ export const  storeEmbedding = async (contentId : string , text:string ) =>{
   } catch (error) {
     console.error("Embedding store error:", error);
   }
+  
 } 
