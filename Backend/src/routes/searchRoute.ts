@@ -1,9 +1,9 @@
 import express from "express";
-import { searchContent } from "../controllers/searchCon";
+import { searchContentForAiAnswer } from "../controllers/searchCon";
 import { UserMiddleware } from "../Middleware/AuthMiddleware";
 
 const router = express.Router();
 
-router.post("/search", UserMiddleware , searchContent);
+router.post("/searchAi", UserMiddleware , searchContentForAiAnswer); 
 
 export default router;

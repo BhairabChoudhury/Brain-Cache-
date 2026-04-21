@@ -3,7 +3,7 @@ import { searchEmbedding  } from "../Ai/SearchEm";
 import ContentModel from "../Models/ContentModel" ; 
 import { generateAnswer } from "../Ai/GenerateAnswer"; 
 
-export const searchContent = async ( req: Request , res : Response) =>{
+export const searchContentForAiAnswer = async ( req: Request , res : Response) =>{
      try {
       const { query } = req.body ; 
 
