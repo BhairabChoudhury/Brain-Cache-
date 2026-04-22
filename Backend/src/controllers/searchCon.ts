@@ -43,6 +43,22 @@ export const searchContentForAiAnswer = async ( req: Request , res : Response) =
 
 export const searchNote = async  ( req :  Request , res : Response) =>{
      try{
+       const userId = (req as any ).userId ;   
+          const  keywords = req.query.search as string  ?
+           {
+            $or : [
+              {title : { $regex : req.query.search , $options : "i"}},
+              {type : { $regex : req.query.search , $options : "i"}}
+            ]
+           } :{} 
+            
+           const contents = await ContentModel.find({
+            ...keywords,
+            userId: userId
+           })
+           res.json({
+            contents
+           }) 
            
      }catch(err) {
       console.error("Search Error Details:", err);
