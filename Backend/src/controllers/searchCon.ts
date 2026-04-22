@@ -38,3 +38,15 @@ export const searchContentForAiAnswer = async ( req: Request , res : Response) =
      }
       
 }
+
+//  searching   for  Note from  title and content  using   regex  in  mogo db data base 
+
+export const searchNote = async  ( req :  Request , res : Response) =>{
+     try{
+           
+     }catch(err) {
+      console.error("Search Error Details:", err);
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      res.status(500).json({message : "Internal Server Error or Search fails", error: errorMessage})  ;   
+     }
+}
