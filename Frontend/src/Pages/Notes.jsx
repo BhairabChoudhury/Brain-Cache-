@@ -64,8 +64,9 @@ export const Notes = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-10">
-      {/* Notes Header */}
+    <div className="min-h-screen bg-[#0a0a0c] text-slate-200 font-sans p-8">
+      <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-10">
+        {/* Notes Header */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex flex-col">
           <h2 className="text-3xl font-bold text-slate-100 mb-1">
@@ -123,6 +124,7 @@ export const Notes = () => {
           <NoteCard key={note.id} note={note} />
         ))}
       </div>
+    </div>
     </div>
   );
 };

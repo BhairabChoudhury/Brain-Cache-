@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; 
 import { NoteCard } from "../../components/NoteCard.jsx"
 import {
   FiSearch, FiBell, FiPlus, FiGrid, FiSettings,
@@ -85,14 +86,13 @@ export const Dashboard = () => {
             <span>Dashboard</span>
           </Link>
 
-          <Link
+          <Link   to="/notes"
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
           >
             <FiFileText className="text-lg" />
             <span>Notes</span>
           </Link>
-
-          <Link
+          <Link   to="/aichat"
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
            
           >
@@ -102,7 +102,7 @@ export const Dashboard = () => {
             </div>
             <span className="text-xs">✨</span>
           </Link>
-          <Link
+          <Link   to="/upload"
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
           >
             <FiUploadCloud className="text-lg" />
