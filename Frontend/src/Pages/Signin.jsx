@@ -5,7 +5,7 @@ import { FaEnvelope, FaLock } from 'react-icons/fa'
 import { CgSpinner } from 'react-icons/cg'
 
 const Signin  = () =>{
-     const  navigate = useNavigate() ; 
+     const  navigate = useNavigate(); 
      const [email , setEmail] = useState() ; 
      const [password , setPassword] = useState() ; 
      const [loading , setLoading] = useState(false) ; 
