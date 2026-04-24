@@ -78,39 +78,36 @@ export const Dashboard = () => {
         <nav className="flex flex-col gap-1 grow">
           <div className="text-xs font-semibold text-slate-500 tracking-wider mb-2 mt-2 px-3">LIBRARY</div>
 
-          <div
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${activeTab === 'dashboard' ? 'bg-indigo-500/10 text-indigo-400' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}
-            onClick={() => setActiveTab('dashboard')}
+          <Link   to="/" 
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
           >
             <FiGrid className="text-lg" />
             <span>Dashboard</span>
-          </div>
+          </Link>
 
-          <div
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${activeTab === 'notes' ? 'bg-indigo-500/10 text-indigo-400' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}
-            onClick={() => setActiveTab('notes')}
+          <Link
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
           >
             <FiFileText className="text-lg" />
             <span>Notes</span>
-          </div>
+          </Link>
 
-          <div
-            className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${activeTab === 'aichat' ? 'bg-[#2a1a4a] text-[#b48cff]' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}
-            onClick={() => setActiveTab('aichat')}
+          <Link
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
+           
           >
             <div className="flex items-center gap-3">
               <FiMessageSquare className="text-lg" />
               <span>AI Chat</span>
             </div>
             <span className="text-xs">✨</span>
-          </div>
-          <div
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${activeTab === 'upload' ? 'bg-indigo-500/10 text-indigo-400' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}`}
-            onClick={() => setActiveTab('upload')}
+          </Link>
+          <Link
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
           >
             <FiUploadCloud className="text-lg" />
             <span>Uploads</span>
-          </div>
+          </Link>
 
           <div className="text-xs font-semibold text-slate-500 tracking-wider mb-2 mt-8 px-3">TAGS</div>
           <div className="flex flex-col gap-1">
