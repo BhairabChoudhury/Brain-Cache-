@@ -1,10 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { FiUpload, FiFileText, FiImage, FiCheckCircle, FiX } from 'react-icons/fi';
 import { BsStars } from 'react-icons/bs';
-
+import axios from 'axios'; 
 export default function Upload() {
   const [files, setFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [title, setTitle] = useState('');
+  const [type, setType] = useState('pdf');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleDragOver = (e) => {
@@ -22,15 +25,13 @@ export default function Upload() {
     setIsDragging(false);
     
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const droppedFiles = Array.from(e.dataTransfer.files);
-      setFiles(prev => [...prev, ...droppedFiles]);
+      setFiles([e.dataTransfer.files[0]]);
     }
   };
 
   const handleFileSelect = (e) => {  // select the file from the file system   , first user click on the browse button   , the folder section open  then user select file from the folder 
     if (e.target.files && e.target.files.length > 0) {
-      const selectedFiles = Array.from(e.target.files);
-      setFiles(prev => [...prev, ...selectedFiles]);
+      setFiles([e.target.files[0]]);
     }
   };
 
@@ -40,7 +41,44 @@ export default function Upload() {
   };
 
   const openFileDialog = () => {
-    fileInputRef.current?.click();
+    fileInputRef.current?.click(); 
+  };
+
+  const handleSubmit = async () => {
+    if (!title.trim() || files.length === 0) return;
+    setIsSubmitting(true);
+    
+    try {
+      const formData = new FormData();// create form data which will send to the backend 
+      formData.append('title', title);
+      formData.append('type', type);
+      
+      // Append all selected files
+      files.forEach((file) => {
+        formData.append('file', file);
+      });
+
+      const response = await axios.post('http://localhost:8000/api/content/create', formData, {
+        withCredentials: true,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await response.json();
+      console.log('Upload successful:', data);
+      
+      // Reset form after successful upload  (autometically deleted after submission)
+      setFiles([]);
+      setTitle('');
+      alert('File successfully uploaded to the backend!');
+    } catch (error) {
+      console.error('Error uploading to backend:', error);
+      alert('Failed to upload file. Please check the console for details or update the API endpoint.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -58,10 +96,12 @@ export default function Upload() {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}   
-        className={`border-2 border-dashed rounded-3xl transition-colors flex flex-col items-center justify-center py-16 px-6 relative group cursor-pointer mt-2
+        className={`border-2 border-dashed rounded-3xl transition-all duration-300 flex flex-col items-center justify-center py-16 px-6 relative group cursor-pointer mt-2
           ${isDragging 
             ? 'border-indigo-500 bg-indigo-500/10' 
-            : 'border-white/10 bg-[#16161a]/40 hover:bg-[#16161a]'
+            : files.length > 0 
+              ? 'border-emerald-500/50 bg-emerald-500/5 hover:bg-emerald-500/10' 
+              : 'border-white/10 bg-[#16161a]/40 hover:bg-[#16161a]'
           }`}
          >
          <input 
@@ -69,61 +109,98 @@ export default function Upload() {
             ref={fileInputRef} 
             onChange={handleFileSelect} 
             className="hidden" 
-            multiple 
          />
-         <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 mb-6 group-hover:scale-110 transition-transform shadow-sm">
-            <FiUpload className="text-2xl" />
+         <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-sm
+            ${files.length > 0 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 border border-white/10 text-slate-300 group-hover:scale-110 transition-transform'}`}>
+            {files.length > 0 ? <FiCheckCircle className="text-3xl" /> : <FiUpload className="text-2xl" />}
          </div>
 
-         <h2 className="text-2xl font-bold text-slate-100 mb-3">Drop files here</h2>
-         <p className="text-slate-500 mb-8 text-[15px]">Drag & drop files, or click to browse</p>
-
-         <button 
-           className="bg-[#9333ea] hover:bg-purple-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors shadow-md mb-10 cursor-pointer pointer-events-none"
-         >
-            Choose Files
-         </button>
+         {files.length > 0 ? (
+           <div className="flex flex-col items-center">
+             <h2 className="text-xl font-bold text-slate-100 mb-1">{files[0].name}</h2>
+             <p className="text-emerald-400 text-[15px] mb-4">Ready for analysis</p>
+             <button
+               onClick={(e) => {
+                 e.stopPropagation();
+                 setFiles([]);
+               }}
+               className="text-red-400 hover:text-red-300 font-medium text-sm transition-colors cursor-pointer px-4 py-2"
+             >
+               Remove file
+             </button>
+           </div>
+         ) : (
+           <>
+             <h2 className="text-2xl font-bold text-slate-100 mb-3">Drop files here</h2>
+             <p className="mb-8 text-[15px] text-slate-500">Drag & drop files, or click to browse</p>
+             <button 
+               className="bg-[#9333ea] hover:bg-purple-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors shadow-md mb-2 cursor-pointer pointer-events-none"
+             >
+                Choose Files
+             </button>
+           </>
+         )}
 
          {/* File Types */}
          
       </div>
-      {/* Selected Files List */}
+
+      {/* Title and Submit Section */}
       {files.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-slate-200">Selected Files ({files.length})</h3>
-            <button 
-              onClick={() => setFiles([])} 
-              className="text-sm text-slate-400 hover:text-red-400 transition-colors"
-            >
-              Clear all
-            </button>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {files.map((file, idx) => (
-              <div key={idx} className="bg-[#111114] border border-white/[0.04] p-3 rounded-xl flex items-center justify-between group">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-lg bg-[#16161a] border border-white/5 flex items-center justify-center shrink-0">
-                    <FiFileText className="text-indigo-400" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-slate-200 truncate pr-2">{file.name}</p>
-                    <p className="text-xs text-slate-500">{(file.size / 1024).toFixed(1)} KB</p>
+        <div className="flex flex-col gap-5 mt-2 bg-[#16161a] border border-white/[0.04] p-6 rounded-2xl shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div>
+            <h3 className="text-lg font-bold text-slate-100 mb-1">Document Details</h3>
+            <p className="text-slate-500 text-sm mb-5">Provide a title and type for your document before submitting.</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Title</label>
+                <input 
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder=" like finance report  2025 ieee event report "
+                  className="w-full bg-[#111114] border border-white/10 rounded-xl px-4 py-3.5 text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all placeholder:text-slate-600"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Document Type</label>
+                <div className="relative">
+                  <select
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                    className="w-full bg-[#111114] border border-white/10 rounded-xl px-4 py-3.5 text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all appearance-none cursor-pointer"
+                  >
+                    <option value="pdf">PDF Document</option>
+                    <option value="image">Image File</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-400">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                   </div>
                 </div>
-                <button 
-                  onClick={(e) => removeFile(idx, e)}
-                  className="text-slate-500 hover:text-red-400 p-2 rounded-lg hover:bg-white/5 transition-colors opacity-0 group-hover:opacity-100 cursor-pointer shrink-0"
-                >
-                  <FiX />
-                </button>
               </div>
-            ))}
+            </div>
           </div>
-
+          
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-2">
+            <div className="text-sm text-slate-400 bg-white/5 px-4 py-2 rounded-lg border border-white/5">
+              <span className="font-medium text-slate-300">Selected:</span> <span className="text-slate-200 ml-1">{files[0].name}</span>
+            </div>
+            <button 
+              onClick={handleSubmit}
+              disabled={isSubmitting || !title.trim()}
+              className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-8 rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer"
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit to Backend'}
+              {!isSubmitting && <FiUpload />}
+            </button>
+          </div>
         </div>
       )}
-
+      
       {/* Info Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
         {/* Card 1 */}
