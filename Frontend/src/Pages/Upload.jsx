@@ -17,7 +17,7 @@ export default function Upload() {
     setIsDragging(false);
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = (e) => {  // drop the file in the dropzone
     e.preventDefault();
     setIsDragging(false);
     
@@ -27,7 +27,7 @@ export default function Upload() {
     }
   };
 
-  const handleFileSelect = (e) => {
+  const handleFileSelect = (e) => {  // select the file from the file system   , first user click on the browse button   , the folder section open  then user select file from the folder 
     if (e.target.files && e.target.files.length > 0) {
       const selectedFiles = Array.from(e.target.files);
       setFiles(prev => [...prev, ...selectedFiles]);
@@ -71,7 +71,6 @@ export default function Upload() {
             className="hidden" 
             multiple 
          />
-         
          <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 mb-6 group-hover:scale-110 transition-transform shadow-sm">
             <FiUpload className="text-2xl" />
          </div>
@@ -121,10 +120,7 @@ export default function Upload() {
               </div>
             ))}
           </div>
-          <button className="mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 self-start px-8 cursor-pointer">
-            <BsStars />
-            Process Files with AI
-          </button>
+
         </div>
       )}
 
