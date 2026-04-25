@@ -154,7 +154,6 @@ export const Dashboard = () => {
 
       {/* Right Column (Secondary / AI features) */}
       <div className="lg:w-80 flex flex-col gap-8 shrink-0">
-
         {/* 4. Uploaded Documents */}
         <section>
           <div className="flex items-center justify-between mb-4 px-1">
