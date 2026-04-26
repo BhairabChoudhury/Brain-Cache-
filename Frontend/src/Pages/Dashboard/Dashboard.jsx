@@ -85,7 +85,6 @@ export const Dashboard = () => {
     } finally {
       setLoading(false) ;
     } 
-
   } 
   return (
     <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
@@ -173,42 +172,7 @@ export const Dashboard = () => {
 
       </div>
 
-      {/* Right Column (Secondary / AI features) */}
-      <div className="lg:w-80 flex flex-col gap-8 shrink-0">
-        {/* 4. Uploaded Documents */}
-        <section>
-          <div className="flex items-center justify-between mb-4 px-1">
-            <h2 className="text-[15px] font-semibold text-slate-100 flex items-center gap-2">
-              <FiUploadCloud className="text-slate-400" />
-              Recent Uploads
-            </h2>
-            <button className="text-slate-400 hover:text-slate-200 transition-colors p-1 rounded cursor-pointer">
-              <FiPlus />
-            </button>
-          </div>
 
-          <div className="bg-[#111114] border border-white/[0.05] rounded-xl flex flex-col p-1.5 shadow-sm">
-            {mockUploads.map((file, idx) => (
-              <div key={file.id} className={`flex items-center gap-3 p-3 rounded-lg hover:bg-[#16161a] transition-colors cursor-pointer ${idx !== mockUploads.length - 1 ? 'border-b border-white/[0.02]' : ''}`}>
-                <div className="w-10 h-10 rounded-lg bg-[#0a0a0c] border border-white/5 flex items-center justify-center shrink-0 shadow-inner">
-                  {getFileIcon(file.type)}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-slate-200 truncate pr-2">{file.name}</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">{file.date}</p>
-                </div>
-              </div>
-            ))}
-
-            <div className="p-2 pt-3">
-              <button className="w-full border border-dashed border-white/10 hover:border-white/20 hover:bg-white/[0.02] text-slate-400 text-xs font-medium py-2 rounded-lg transition-colors cursor-pointer text-center">
-                Browse all files →
-              </button>
-            </div>
-          </div>
-        </section>
-
-      </div>
 
     </div>
   );
