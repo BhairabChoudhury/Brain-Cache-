@@ -30,7 +30,7 @@ export const createContent = async (data: CreateContentInput) => {
   //  TYPE HANDLING
   if (type === "note" ) {
     if (!content) throw new Error("Content required for note");
-    extractedText = content;
+    extractedText = content ; // store content in extractedText which i recive from frontend 
   }
 
   else if (type === "link" ) {

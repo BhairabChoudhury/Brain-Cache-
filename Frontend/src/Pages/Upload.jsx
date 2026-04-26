@@ -20,6 +20,7 @@ export default function Upload() {
     setIsDragging(false);
   };
 
+  
   const handleDrop = (e) => {  // drop the file in the dropzone
     e.preventDefault();
     setIsDragging(false);

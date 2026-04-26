@@ -17,7 +17,7 @@ const ContentSchema = new Schema<IContent>({
   fileUrl :{ type :String  } ,
   extractedText :{ type :String  } , 
   userId :{ type:mongoose.Schema.Types.ObjectId , ref:"User" , required:true} 
-}, {
+}, {  
     timestamps: true
 })
 
