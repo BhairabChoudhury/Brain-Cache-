@@ -62,9 +62,29 @@ export const Dashboard = () => {
     }
   };   
 
-  const  handleSaveNote = () => { 
-      
-   
+  const  handleSaveNote = async () => { 
+    setLoading(true) ;
+    try {
+        const result = await axios.post('http://localhost:8000/api/content/create' , {
+          title : captureTitle , 
+          type : 'note',
+          content : captureContent 
+        }) 
+      console.log(result)   ; 
+     if( !result.ok){
+      throw new Error('Upload failed') ; 
+     } 
+      const data = result.json();
+      console.log(data) ; 
+      alert('Note successfully uploaded to the backend!') ;    
+      setCaptureTitle('')
+      setCaptureContent('') ; 
+    }catch(error) {
+      console.error('Error uploading to backend:', error);
+      alert('Failed to upload file. Please check the console for details or update the API endpoint.');
+    } finally {
+      setLoading(false) ;
+    } 
 
   } 
   return (
