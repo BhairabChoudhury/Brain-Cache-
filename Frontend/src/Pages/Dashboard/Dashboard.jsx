@@ -93,7 +93,9 @@ export const Dashboard = () => {
             <div className="flex items-center justify-between px-4 py-3 bg-[#16161a] rounded-xl border-t border-white/[0.04] mt-2">
               
               <button onClick={handleSaveNote} className="bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-sm">
-                Save Note <div className="hidden sm:inline text-indigo-200 text-xs ml-1">⌘Enter</div>
+                {/* Save Note <div className="hidden sm:inline text-indigo-200 text-xs ml-1">⌘Enter</div> */}
+                {loading ? "Saving ... " : "Save Note "} 
+                {loading && <FiUpload className="animate-bounce" /> }   
               </button>
             </div>
           </div>
