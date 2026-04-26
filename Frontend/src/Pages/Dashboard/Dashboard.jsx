@@ -65,10 +65,14 @@ export const Dashboard = () => {
   const  handleSaveNote = async () => { 
     setLoading(true) ;
     try {
-        const result = await axios.post('http://localhost:8000/api/content/create' , {
+        const result = await axios.post('http://localhost:8000/api/content/create' ,  {
+           headers : { 
+            Authorization : `Bearer ${localStorage.getItem("token")}`
+          }  , 
           title : captureTitle , 
           type : 'note',
-          content : captureContent 
+          content : captureContent  
+         
         }) 
       console.log(result)   ; 
      if( !result.ok){
