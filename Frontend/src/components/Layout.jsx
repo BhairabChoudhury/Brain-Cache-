@@ -5,10 +5,9 @@ import { BiBrain } from 'react-icons/bi';
 
 export const Layout = () => {
   const navLinkClasses = ({ isActive }) =>
-    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
-      isActive
-        ? 'bg-indigo-500/10 text-indigo-400'
-        : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+    `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${isActive
+      ? 'bg-indigo-500/10 text-indigo-400'
+      : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
     }`;
 
   // Special class for AI Chat
