@@ -51,7 +51,8 @@ const mockUploads = [
 
 export const Dashboard = () => {
   const [captureTitle, setCaptureTitle] = useState("");
-  const [captureContent, setCaptureContent] = useState("");
+  const [captureContent, setCaptureContent] = useState("");  
+   const[loading , setLoading] = useState(false) ; 
 
   const getFileIcon = (type) => {
     switch (type) {
@@ -61,10 +62,11 @@ export const Dashboard = () => {
     }
   };   
 
-  const  handleSaveNote = () => {
-         
-  } 
+  const  handleSaveNote = () => { 
+      
+   
 
+  } 
   return (
     <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
       {/* Left Column (Main Focus) */}
@@ -86,11 +88,11 @@ export const Dashboard = () => {
                 onChange={(e) => setCaptureContent(e.target.value)}
                 placeholder="Write anything to save to your brain..."
                 className="bg-transparent border-none text-slate-300 text-[15px] outline-none w-full lg:h-20 resize-none placeholder-slate-500 leading-relaxed custom-scrollbar"
-              />
+              />   
             </div>
             <div className="flex items-center justify-between px-4 py-3 bg-[#16161a] rounded-xl border-t border-white/[0.04] mt-2">
               
-              <button className="bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-sm">
+              <button onClick={handleSaveNote} className="bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-sm">
                 Save Note <div className="hidden sm:inline text-indigo-200 text-xs ml-1">⌘Enter</div>
               </button>
             </div>
