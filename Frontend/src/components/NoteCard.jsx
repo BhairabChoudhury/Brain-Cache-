@@ -13,7 +13,7 @@ export function NoteCard({ note }) {
                     {(note.tags || []).map(tag => (
                         <span key={tag} className="bg-white/5 text-slate-300 text-[11px] px-2 py-0.5 rounded-md font-medium">
                             {tag}
-                        </span>
+                        </span>  
                     ))}
                 </div>
                 <span className="text-slate-500 text-[11px] font-medium shrink-0">
