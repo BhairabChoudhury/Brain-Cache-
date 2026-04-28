@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState  , useContext } from "react";
 import { NoteCard } from "../../components/NoteCard.jsx"
 import {
   FiFileText, FiTag, FiClock,
   FiUploadCloud, FiUpload, FiImage, FiFile, FiPlus
 } from "react-icons/fi";
 import axios from "axios" ;   
-import ContentProvider from "../../Context/ContentProvider.jsx";   
+import { useContent } from "../../Context/ContentProvider.jsx";   
 // Mock Data
-const mockStats = {
+const mockStats = { 
+   
   totalNotes: 142,
   documents: 28,
-  imagesUploaded: 15
+  imagesUploaded: 15 
+
 };
 
 const mockNotes = [
@@ -20,7 +22,8 @@ const mockNotes = [
     preview: "Focus on early access users first. Send out the beta invitations by Tuesday and gather feedback before...",
     tags: ["Strategy", "Marketing"],
     date: "2h ago"
-  },
+  },  
+
   {
     id: 2,
     title: "System Architecture V2",
@@ -55,6 +58,8 @@ export const Dashboard = () => {
   const [captureContent, setCaptureContent] = useState("");  
    const[loading , setLoading] = useState(false) ; 
 
+
+   const {  notes ,setNotes} = useContent();
   const getFileIcon = (type) => {
     switch (type) {
       case 'pdf': return <FiFile className="text-red-400" />;
@@ -74,7 +79,7 @@ export const Dashboard = () => {
           type : 'note',
           content : captureContent  
          
-        }) 
+        })    
       console.log(result)   ; 
      if( !result.ok){
       throw new Error('Upload failed') ; 
