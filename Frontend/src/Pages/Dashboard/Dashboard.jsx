@@ -4,7 +4,8 @@ import {
   FiFileText, FiTag, FiClock,
   FiUploadCloud, FiUpload, FiImage, FiFile, FiPlus
 } from "react-icons/fi";
-
+import axios from "axios" ;   
+import ContentProvider from "../../Context/ContentProvider.jsx";   
 // Mock Data
 const mockStats = {
   totalNotes: 142,
