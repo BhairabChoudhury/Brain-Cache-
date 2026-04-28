@@ -59,7 +59,11 @@ export const Dashboard = () => {
    const[loading , setLoading] = useState(false) ; 
 
 
-   const {  notes ,setNotes} = useContent();
+   const { notes, setNotes } = useContent();
+
+   const recentNotes = [...notes]
+     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+     .slice(0, 6);
   const getFileIcon = (type) => {
     switch (type) {
       case 'pdf': return <FiFile className="text-red-400" />;
@@ -77,7 +81,7 @@ export const Dashboard = () => {
           }  , 
           title : captureTitle , 
           type : 'note',
-          content : captureContent  
+           extractedText   : captureContent  
          
         })    
       console.log(result)   ; 
@@ -174,8 +178,8 @@ export const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {mockNotes.map(note => (
-              <NoteCard key={note.id} note={note} />
+            {recentNotes.map(note => (
+              <NoteCard key={note._id || note.id} note={note} />
             ))}
           </div>
         </section>
