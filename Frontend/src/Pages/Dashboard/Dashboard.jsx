@@ -148,7 +148,7 @@ console.log("Recent Notes:", recentNotes);
             </div>
             <div>
               <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-1">Total Notes</p>
-              <p className="text-xl font-bold text-slate-100">{mockStats.totalNotes}</p>
+              <p className="text-xl font-bold text-slate-100">{totalNote}</p>
             </div>    
           </div>
           <div className="bg-[#111114] border border-white/[0.04] rounded-xl p-5 flex items-center gap-4">
@@ -157,7 +157,7 @@ console.log("Recent Notes:", recentNotes);
             </div>
             <div>
                <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-1">Documents</p>
-               <p className="text-xl font-bold text-slate-100">{mockStats.documents}</p>
+               <p className="text-xl font-bold text-slate-100">{totalDocument}</p>
             </div>
           </div>
           <div className="bg-[#111114] border border-white/[0.04] rounded-xl p-5 flex items-center gap-4">
@@ -166,7 +166,7 @@ console.log("Recent Notes:", recentNotes);
             </div>
             <div>
               <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-1">Images Upload</p>
-              <p className="text-xl font-bold text-slate-100">{mockStats.imagesUploaded}</p>
+              <p className="text-xl font-bold text-slate-100">{totalImage}</p>
             </div>
           </div>
         </section>
