@@ -57,7 +57,7 @@ export const Dashboard = () => {
   const [captureTitle, setCaptureTitle] = useState("");
   const [captureContent, setCaptureContent] = useState("");  
    const[loading , setLoading] = useState(false) ; 
-
+  
 
    const { notes, setNotes } = useContent();
 
@@ -65,8 +65,10 @@ export const Dashboard = () => {
      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
      .slice(0, 6);
 
-  console.log("Recent Notes:", recentNotes);
-  
+console.log("Recent Notes:", recentNotes); 
+    const totalNote = notes.filter(note=> note.type==="note" ).length;  
+    const totalDocument = notes.filter(note => note.type === 'document').length;
+    const totalImage = notes.filter(note => note.type === 'image').length;    
 
   const getFileIcon = (type) => {
     switch (type) {
@@ -154,8 +156,8 @@ export const Dashboard = () => {
               <FiUploadCloud className="text-lg" />
             </div>
             <div>
-              <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-1">Documents</p>
-              <p className="text-xl font-bold text-slate-100">{mockStats.documents}</p>
+               <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-1">Documents</p>
+               <p className="text-xl font-bold text-slate-100">{mockStats.documents}</p>
             </div>
           </div>
           <div className="bg-[#111114] border border-white/[0.04] rounded-xl p-5 flex items-center gap-4">
