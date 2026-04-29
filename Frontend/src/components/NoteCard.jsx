@@ -5,9 +5,7 @@ export function NoteCard({ note }) {
             <div className="flex justify-between items-start mb-1">
                 <h3 className="text-[15px] font-semibold text-slate-100 leading-snug group-hover:text-indigo-300 transition-colors">{note.title}</h3>
             </div>
-            <p className="text-slate-400 text-[13px] leading-relaxed flex-grow line-clamp-3 mb-1">
-                {note.content || note.extractedText || ""}
-            </p>
+
             <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/[0.04]">
                 <div className="flex gap-1.5 flex-wrap">
                     {(note.tags || []).map(tag => (
@@ -23,3 +21,4 @@ export function NoteCard({ note }) {
         </div>
     );
 }
+//  do,t need show  content in note card 
