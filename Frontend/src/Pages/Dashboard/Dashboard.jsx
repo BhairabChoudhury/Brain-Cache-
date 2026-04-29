@@ -64,6 +64,10 @@ export const Dashboard = () => {
    const recentNotes = [...notes]
      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
      .slice(0, 6);
+
+  console.log("Recent Notes:", recentNotes);
+  
+
   const getFileIcon = (type) => {
     switch (type) {
       case 'pdf': return <FiFile className="text-red-400" />;
@@ -143,7 +147,7 @@ export const Dashboard = () => {
             <div>
               <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-1">Total Notes</p>
               <p className="text-xl font-bold text-slate-100">{mockStats.totalNotes}</p>
-            </div>
+            </div>    
           </div>
           <div className="bg-[#111114] border border-white/[0.04] rounded-xl p-5 flex items-center gap-4">
             <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400">
