@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import { FiMessageSquare, FiPaperclip, FiSend, FiCopy, FiThumbsUp, FiThumbsDown, FiRefreshCcw, FiBookOpen, FiChevronRight } from 'react-icons/fi';
 import { BiBrain } from 'react-icons/bi';
 import { BsStars } from 'react-icons/bs';
+import { useContent } from '../Context/ContentProvider.jsx' ;   
+import axios from "axios" ;    
 
 export default function AiChat() {
   const [inputValue, setInputValue] = useState('');
-
+    const inputSubmmite = async() => {
+                      try{
+                        
+                      }catch(err) {
+                        console.error("Error submitting input", err) ; 
+                      }finally{
+                        setInputValue("") 
+                   }
+    }
   return (
     <div className="h-full w-full flex flex-col">
       {/* Header */}
@@ -129,7 +139,10 @@ export default function AiChat() {
                 placeholder="Ask Cortex anything about your notes..." 
                 className="flex-1 bg-transparent border-none text-slate-200 placeholder-slate-500 px-2 py-3 outline-none text-[15px]"
             />
-            <button className={`p-3 rounded-xl transition-all cursor-pointer ${inputValue ? 'bg-[#9333ea] text-white hover:bg-purple-500 shadow-md' : 'bg-white/5 text-slate-500'}`}>
+            <button  
+              onClick={inputSubmmite} 
+              disabled={!inputValue} 
+            className={`p-3 rounded-xl transition-all cursor-pointer ${inputValue ? 'bg-[#9333ea] text-white hover:bg-purple-500 shadow-md' : 'bg-white/5 text-slate-500'}`}>
                 <FiSend className="text-lg" />
             </button>
         </div>
