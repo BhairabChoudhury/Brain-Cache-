@@ -14,12 +14,14 @@ const ContentProvider = ({children}) =>{
                 Authorization : `Bearer ${localStorage.getItem("token")}`
               }
             })
-            setNotes(res.data) 
+            if (res.data && res.data.success) {
+              setNotes(res.data.data);
+            }
         }catch(error){
           console.error("Error fetching content", error)
         } 
       }    
-
+      fetchContent();
   }, [])
 
    return  (<ContentContext.Provider value={{notes , setNotes}}>

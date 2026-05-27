@@ -6,52 +6,6 @@ import {
 } from "react-icons/fi";
 import axios from "axios" ;   
 import { useContent } from "../../Context/ContentProvider.jsx";   
-// Mock Data
-const mockStats = { 
-   
-  totalNotes: 142,
-  documents: 28,
-  imagesUploaded: 15 
-
-};
-
-const mockNotes = [
-  {
-    id: 1,
-    title: "Product Launch Strategy",
-    preview: "Focus on early access users first. Send out the beta invitations by Tuesday and gather feedback before...",
-    tags: ["Strategy", "Marketing"],
-    date: "2h ago"
-  },  
-
-  {
-    id: 2,
-    title: "System Architecture V2",
-    preview: "Moving towards a microservices approach. Need to evaluate Kubernetes vs. Docker Swarm for the container...",
-    tags: ["Engineering"],
-    date: "5h ago"
-  },
-  {
-    id: 3,
-    title: "Q3 Feature Ideas",
-    preview: "1. AI auto-tagging 2. Semantic search 3. PDF text extraction 4. Voice memo transcription...",
-    tags: ["Product", "Ideas"],
-    date: "1d ago"
-  },
-  {
-    id: 4,
-    title: "Meeting with Design Team",
-    preview: "Discussed the new dashboard layout. Decisions: minimalist dark mode, accent color primary indigo...",
-    tags: ["Meeting"],
-    date: "2d ago"
-  }
-];
-
-const mockUploads = [
-  { id: 1, name: "Q2_Financial_Report.pdf", type: "pdf", date: "Today, 10:30 AM" },
-  { id: 2, name: "Architecture_Diagram.png", type: "image", date: "Yesterday" },
-  { id: 3, name: "User_Research_Notes.docx", type: "doc", date: "Aug 12" },
-];
 
 export const Dashboard = () => {
   const [captureTitle, setCaptureTitle] = useState("");
@@ -79,29 +33,35 @@ console.log("Recent Notes:", recentNotes);
   };   
 
   const  handleSaveNote = async () => { 
+    if (!captureTitle.trim()) {
+      alert("Please give the note a title first.");
+      return;
+    }
     setLoading(true) ;
     try {
-        const result = await axios.post('http://localhost:8000/api/content/create' ,  {
-           headers : { 
-            Authorization : `Bearer ${localStorage.getItem("token")}`
-          }  , 
-          title : captureTitle , 
-          type : 'note',
-           extractedText   : captureContent  
-         
-        })    
-      console.log(result)   ; 
-     if( !result.ok){
-      throw new Error('Upload failed') ; 
-     } 
-      const data = result.json();
-      console.log(data) ; 
-      alert('Note successfully uploaded to the backend!') ;    
-      setCaptureTitle('')
-      setCaptureContent('') ; 
-    }catch(error) {
+      const response = await axios.post('http://localhost:8000/api/content/create', {
+        title: captureTitle,
+        type: 'note',
+        content: captureContent
+      }, {
+        headers: { 
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });    
+
+      if (response.data && response.data.success) {
+        alert('Note successfully uploaded to the backend!');
+        setCaptureTitle('');
+        setCaptureContent('');
+        if (response.data.data) {
+          setNotes(prevNotes => [response.data.data, ...prevNotes]);
+        }
+      } else {
+        alert('Failed to upload note.');
+      }
+    } catch(error) {
       console.error('Error uploading to backend:', error);
-      alert('Failed to upload file. Please check the console for details or update the API endpoint.');
+      alert('Failed to upload note. Please check the backend connection.');
     } finally {
       setLoading(false) ;
     } 

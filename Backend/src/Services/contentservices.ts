@@ -22,7 +22,7 @@ interface CreateContentInput { // model of data which i recive from controller
 
 //  CREATE CONTENT
 export const createContent = async (data: CreateContentInput) => {
-  const { title, type, content, url, file, userId } = data;
+  const { title, type, url, content ,  file, userId } = data;
 
   let fileUrl = "";
   let extractedText = "";

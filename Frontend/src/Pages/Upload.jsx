@@ -2,7 +2,10 @@ import React, { useState, useRef } from 'react';
 import { FiUpload, FiFileText, FiImage, FiCheckCircle, FiX } from 'react-icons/fi';
 import { BsStars } from 'react-icons/bs';
 import axios from 'axios'; 
+import { useContent } from '../Context/ContentProvider';
+
 export default function Upload() {
+  const { setNotes } = useContent();
   const [files, setFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [title, setTitle] = useState('');
@@ -60,20 +63,26 @@ export default function Upload() {
       });
 
       const response = await axios.post('http://localhost:8000/api/content/create', formData, {
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
       });
 
-      if (!response.ok) {
+      if (response.data && response.data.success) {
+        console.log('Upload successful:', response.data);
+        
+        // Update local notes state so the uploaded document shows up immediately
+        if (response.data.data) {
+          setNotes(prevNotes => [response.data.data, ...prevNotes]);
+        }
+        
+        // Reset form after successful upload  (automatically deleted after submission)
+        setFiles([]);
+        setTitle('');
+        alert('File successfully uploaded to the backend!');
+      } else {
         throw new Error('Upload failed');
       }
-
-      const data = await response.json();
-      console.log('Upload successful:', data);
-      
-      // Reset form after successful upload  (autometically deleted after submission)
-      setFiles([]);
-      setTitle('');
-      alert('File successfully uploaded to the backend!');
     } catch (error) {
       console.error('Error uploading to backend:', error);
       alert('Failed to upload file. Please check the console for details or update the API endpoint.');

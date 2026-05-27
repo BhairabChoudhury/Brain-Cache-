@@ -4,16 +4,18 @@ import * as contentService from "../Services/contentservices";
 //  Create Content
 export const createContent = async (req: Request, res: Response) => {
   try {
-    const { title, type, content, url } = req.body;
+    const { title, type,  content , url , tags  } = req.body; 
 
     const file = (req as any).file; // for pdf/image which handel by multer middleware 
 
     const newContent = await contentService.createContent({
       title,
       type,
-      content,
       url,
+      content,
       file,// infomation of file  
+      // @ts-ignore  
+      tags , //  
       userId: (req as any).userId // from auth middleware
     });
 
