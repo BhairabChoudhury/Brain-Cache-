@@ -9,6 +9,14 @@ export default function AiChat() {
   const [inputValue, setInputValue] = useState('');
     const inputSubmmite = async() => {
                       try{
+                        const response = await axios.post("http://localhost:8000/api/search/searchAi", 
+                          { message: inputValue },
+                          {
+                            headers: {
+                              Authorization: `Bearer ${localStorage.getItem("token")}`
+                            }
+                          }
+                        );  
                         
                       }catch(err) {
                         console.error("Error submitting input", err) ; 
