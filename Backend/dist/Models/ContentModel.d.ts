@@ -5,6 +5,7 @@ export interface IContent extends Document {
     url?: string;
     fileUrl?: string;
     extractedText?: string;
+    tags?: string[];
     userId: mongoose.Schema.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;

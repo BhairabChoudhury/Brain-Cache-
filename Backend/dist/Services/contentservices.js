@@ -26,7 +26,7 @@ const addToVectorDB = (text, contentId) => __awaiter(void 0, void 0, void 0, fun
 });
 //  CREATE CONTENT
 const createContent = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, type, content, url, file, userId } = data;
+    const { title, type, url, content, file, userId } = data;
     let fileUrl = "";
     let extractedText = "";
     let URL = "";
@@ -34,7 +34,7 @@ const createContent = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (type === "note") {
         if (!content)
             throw new Error("Content required for note");
-        extractedText = content;
+        extractedText = content; // store content in extractedText which i recive from frontend 
     }
     else if (type === "link") {
         if (!url)

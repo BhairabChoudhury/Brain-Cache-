@@ -47,14 +47,16 @@ const contentService = __importStar(require("../Services/contentservices"));
 //  Create Content
 const createContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { title, type, content, url } = req.body;
+        const { title, type, content, url, tags } = req.body;
         const file = req.file; // for pdf/image which handel by multer middleware 
         const newContent = yield contentService.createContent({
             title,
             type,
-            content,
             url,
+            content,
             file, // infomation of file  
+            // @ts-ignore  
+            tags, //  
             userId: req.userId // from auth middleware
         });
         res.status(201).json({

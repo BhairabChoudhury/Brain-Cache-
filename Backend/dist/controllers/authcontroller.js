@@ -16,7 +16,6 @@ exports.signin = exports.signup = void 0;
 const UserModel_1 = __importDefault(require("../Models/UserModel"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const JWT_TOKEN = process.env.JWT_TOKEN;
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("hi i am here ghgf ");
     try {
@@ -46,7 +45,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            res.status(400).json({ "message": " All fields required" });
+            return res.status(400).json({ "message": " All fields required" });
         }
         const user = yield UserModel_1.default.findOne({ email });
         if (!user) {
@@ -56,7 +55,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-        const token = jsonwebtoken_1.default.sign({ id: user._id }, JWT_TOKEN, { expiresIn: "7d" });
+        const token = jsonwebtoken_1.default.sign({ id: user._id }, process.env.JWT_TOKEN, { expiresIn: "7d" });
         res.json({ token });
     }
     catch (err) {

@@ -12,37 +12,62 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchContent = void 0;
+exports.searchNote = exports.searchContentForAiAnswer = void 0;
 const SearchEm_1 = require("../Ai/SearchEm");
 const ContentModel_1 = __importDefault(require("../Models/ContentModel"));
 const GenerateAnswer_1 = require("../Ai/GenerateAnswer");
-const searchContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const searchContentForAiAnswer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { query } = req.body;
         if (!query) {
             return res.status(400).json({ message: " Query Required" });
         }
-        console.log(query);
+        // console.log(query) ;
         //  1. Vector Search
         const contentIds = yield (0, SearchEm_1.searchEmbedding)(query);
+        console.log(contentIds);
         // 2. Fetch from MongoDB
         const contents = yield ContentModel_1.default.find({
             _id: { $in: contentIds },
-            userId: req.user.id,
+            userId: req.userId,
         });
         //  3. Combine context
         const context = contents.map(c => c.extractedText).join("\n\n");
         //  4. Generate AI answer
         const answer = yield (0, GenerateAnswer_1.generateAnswer)(context, query);
-        console.log(answer);
+        // console.log(answer) ;
         res.json({
-            answer,
-            contents,
+            answer
         });
     }
     catch (err) {
-        res.status(500).json({ message: "Internal Server Error or Search fails " });
+        console.error("Search Error Details:", err);
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        res.status(500).json({ message: "Internal Server Error or Search fails", error: errorMessage });
     }
 });
-exports.searchContent = searchContent;
+exports.searchContentForAiAnswer = searchContentForAiAnswer;
+//  searching   for  Note from  title and content  using   regex  in  mogo db data base 
+const searchNote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.userId;
+        const keywords = req.query.search ?
+            {
+                $or: [
+                    { title: { $regex: req.query.search, $options: "i" } },
+                    { type: { $regex: req.query.search, $options: "i" } }
+                ]
+            } : {};
+        const contents = yield ContentModel_1.default.find(Object.assign(Object.assign({}, keywords), { userId: userId }));
+        res.json({
+            contents
+        });
+    }
+    catch (err) {
+        console.error("Search Error Details:", err);
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        res.status(500).json({ message: "Internal Server Error or Search fails", error: errorMessage });
+    }
+});
+exports.searchNote = searchNote;
 //# sourceMappingURL=searchCon.js.map

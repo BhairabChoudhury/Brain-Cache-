@@ -14,9 +14,12 @@ const aiservics_1 = require("../Services/aiservics");
 const searchEmbedding = (query) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const CollectionSet = yield (0, aiservics_1.collection)();
+    const count = yield CollectionSet.count();
+    if (count === 0)
+        return []; // If there are no documents, return empty array immediately
     const results = yield CollectionSet.query({
         queryTexts: [query],
-        nResults: 5,
+        nResults: Math.min(5, count),
     });
     console.log(((_a = results.ids) === null || _a === void 0 ? void 0 : _a[0]) || []);
     return ((_b = results.ids) === null || _b === void 0 ? void 0 : _b[0]) || [];

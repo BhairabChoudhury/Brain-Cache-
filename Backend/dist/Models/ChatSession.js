@@ -34,17 +34,18 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const ContentSchema = new mongoose_1.Schema({
-    title: { type: String, required: true },
-    type: { type: String, enum: ["note", "link", "pdf", "image"], required: true },
-    url: { type: String },
-    fileUrl: { type: String },
-    extractedText: { type: String },
-    tags: { type: Array, default: [], of: String },
-    userId: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "User", required: true }
+const MessageSchema = new mongoose_1.Schema({
+    sender: { type: String, enum: ["user", "ai"], required: true },
+    text: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+});
+const ChatSessionSchema = new mongoose_1.Schema({
+    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: "User", required: true },
+    title: { type: String, required: true, default: "New Chat" },
+    messages: [MessageSchema]
 }, {
     timestamps: true
 });
-const ContentModel = mongoose_1.default.model("Content", ContentSchema);
-exports.default = ContentModel;
-//# sourceMappingURL=ContentModel.js.map
+const ChatSessionModel = mongoose_1.default.model("ChatSession", ChatSessionSchema);
+exports.default = ChatSessionModel;
+//# sourceMappingURL=ChatSession.js.map
