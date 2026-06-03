@@ -23,7 +23,7 @@ export const createSession = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     console.error("Create Chat Session Error:", error);
-    //  this error is not comming from the server
+    //  this error is not comming from the server 
     res.status(500).json({
       success: false,
       message: error.message

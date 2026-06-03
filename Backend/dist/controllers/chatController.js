@@ -34,6 +34,7 @@ const createSession = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         console.error("Create Chat Session Error:", error);
+        //  this error is not comming from the server 
         res.status(500).json({
             success: false,
             message: error.message
