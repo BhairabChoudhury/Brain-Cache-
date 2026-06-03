@@ -1,8 +1,9 @@
 import React , { useState } from 'react' 
-import { useNavigate } from 'react-router-dom' 
+import { useNavigate, Link } from 'react-router-dom' 
 import  axios from 'axios' 
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa'
 import { CgSpinner } from 'react-icons/cg' 
+import { BACKEND_URL } from '../config'
 const Signup = () => {  
     const [ name , setName] = useState('') ; 
     const [email , setEmail] = useState('') ; 
@@ -20,8 +21,8 @@ const Signup = () => {
 
         setLoading(true) ; 
         try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", {
-        name: name,
+      const response = await axios.post(`${BACKEND_URL}/api/auth/signup`, {
+        username: name,
         email: email,
         password: password
       })
@@ -97,7 +98,7 @@ const Signup = () => {
 
           <div className='flex items-center justify-between mt-4 text-sm text-white/80'>
             <span>Already have an account?</span>
-            <a href="http://localhost:5173/signin" className='text-white font-semibold hover:underline'>Log In</a>
+            <Link to="/signin" className='text-white font-semibold hover:underline'>Log In</Link>
           </div>
         </form>
       </div>

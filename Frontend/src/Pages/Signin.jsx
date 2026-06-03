@@ -3,6 +3,7 @@ import  { useNavigate} from "react-router-dom" ;
 import axios  from "axios" ; 
 import { FaEnvelope, FaLock } from 'react-icons/fa'
 import { CgSpinner } from 'react-icons/cg'
+import { BACKEND_URL } from '../config'
 
 const Signin  = () =>{
      const  navigate = useNavigate(); 
@@ -15,7 +16,7 @@ const Signin  = () =>{
         setError("");
         setLoading(true);
         try {
-            const response = await axios.post("https://ai-node-g548.onrender.com/api/user/signin", {
+            const response = await axios.post(`${BACKEND_URL}/api/auth/signin`, {
                 email,
                 password
             });

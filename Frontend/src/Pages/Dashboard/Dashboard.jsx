@@ -6,6 +6,7 @@ import {
 } from "react-icons/fi";
 import axios from "axios" ;   
 import { useContent } from "../../Context/ContentProvider.jsx";   
+import { BACKEND_URL } from "../../config";
 
 export const Dashboard = () => {
   const [captureTitle, setCaptureTitle] = useState("");
@@ -39,7 +40,7 @@ console.log("Recent Notes:", recentNotes);
     }
     setLoading(true) ;
     try {
-      const response = await axios.post('http://localhost:8000/api/content/create', {
+      const response = await axios.post(`${BACKEND_URL}/api/content/create`, {
         title: captureTitle,
         type: 'note',
         content: captureContent

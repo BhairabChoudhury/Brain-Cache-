@@ -1,9 +1,18 @@
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { FiBell, FiGrid, FiSettings, FiFileText, FiMessageSquare, FiUploadCloud } from 'react-icons/fi';
+import React, { useEffect } from 'react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { FiBell, FiGrid, FiSettings, FiFileText, FiMessageSquare, FiUploadCloud, FiLogOut } from 'react-icons/fi';
 import { BiBrain } from 'react-icons/bi';
 
 export const Layout = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin");
+    }
+  }, [navigate]);
+
   const navLinkClasses = ({ isActive }) =>
     `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${isActive
       ? 'bg-indigo-500/10 text-indigo-400'
@@ -68,6 +77,16 @@ export const Layout = () => {
           <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 font-medium cursor-pointer hover:text-slate-200 hover:bg-white/5">
             <FiSettings className="text-lg" />
             <span>Settings</span>
+          </div>
+          <div 
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/signin");
+            }}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-400 font-medium cursor-pointer hover:text-red-300 hover:bg-red-500/10"
+          >
+            <FiLogOut className="text-lg" />
+            <span>Sign Out</span>
           </div>
         </div>
       </aside>

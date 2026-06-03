@@ -2,6 +2,7 @@ import React from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { useContent } from "../Context/ContentProvider";
 import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export function NoteCard({ note }) {
     const { setNotes } = useContent();
@@ -21,7 +22,7 @@ export function NoteCard({ note }) {
                 return;
             }
 
-            const response = await axios.delete(`http://localhost:8000/api/content/delete/:noteId`, {
+            const response = await axios.delete(`${BACKEND_URL}/api/content/delete/${noteId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

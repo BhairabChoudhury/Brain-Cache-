@@ -1,5 +1,6 @@
 import React , {useContext , createContext , useState , useEffect} from "react"  
 import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 const ContentContext  = createContext() ; 
 
@@ -9,7 +10,7 @@ const ContentProvider = ({children}) =>{
   useEffect(() => { 
       const  fetchContent = async() => { 
         try{
-            const  res =  await axios.get(`http://localhost:8000/api/content/get` , {
+            const  res =  await axios.get(`${BACKEND_URL}/api/content/get` , {
               headers :{
                 Authorization : `Bearer ${localStorage.getItem("token")}`
               }

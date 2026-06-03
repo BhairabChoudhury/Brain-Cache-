@@ -17,6 +17,7 @@ import { BiBrain } from 'react-icons/bi';
 import { BsStars } from 'react-icons/bs';
 import { useContent } from '../Context/ContentProvider.jsx';
 import axios from "axios";
+import { BACKEND_URL } from '../config';
 
 export default function AiChat() {
   const { notes } = useContent();
@@ -71,7 +72,7 @@ export default function AiChat() {
   const fetchSessions = async () => {
     try {
       setError(null);
-      const response = await axios.get("http://localhost:8000/api/chat/sessions", getAuthHeaders());
+      const response = await axios.get(`${BACKEND_URL}/api/chat/sessions`, getAuthHeaders());
       if (response.data && response.data.success) {
         const fetchedSessions = response.data.data;
         setSessions(fetchedSessions);
@@ -87,7 +88,7 @@ export default function AiChat() {
 
   const fetchSessionDetails = async (sessionId) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/chat/session/${sessionId}`, getAuthHeaders());
+      const response = await axios.get(`${BACKEND_URL}/api/chat/session/${sessionId}`, getAuthHeaders());
       if (response.data && response.data.success) {
         setCurrentSession(response.data.data);
       }
@@ -102,7 +103,7 @@ export default function AiChat() {
     setActionLoading(true);
     try {
       setError(null);
-      const response = await axios.post("http://localhost:8000/api/chat/session", {}, getAuthHeaders());
+      const response = await axios.post(`${BACKEND_URL}/api/chat/session`, {}, getAuthHeaders());
       if (response.data && response.data.success) {
         const newSession = response.data.data;
         setSessions(prev => [newSession, ...prev]);
@@ -124,7 +125,7 @@ export default function AiChat() {
     
     try {
       setError(null);
-      const response = await axios.delete(`http://localhost:8000/api/chat/session/${sessionId}`, getAuthHeaders());
+      const response = await axios.delete(`${BACKEND_URL}/api/chat/session/${sessionId}`, getAuthHeaders());
       if (response.data && response.data.success) {
         setSessions(prev => prev.filter(s => s._id !== sessionId));
         if (activeSessionId === sessionId) {
@@ -153,7 +154,7 @@ export default function AiChat() {
     if (!targetSessionId) {
       try {
         setLoading(true);
-        const newSessionRes = await axios.post("http://localhost:8000/api/chat/session", {}, getAuthHeaders());
+        const newSessionRes = await axios.post(`${BACKEND_URL}/api/chat/session`, {}, getAuthHeaders());
         if (newSessionRes.data && newSessionRes.data.success) {
           const newSession = newSessionRes.data.data;
           targetSessionId = newSession._id;
@@ -185,7 +186,7 @@ export default function AiChat() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/chat/session/${targetSessionId}/message`,
+        `${BACKEND_URL}/api/chat/session/${targetSessionId}/message`,
         { message: queryText },
         getAuthHeaders()
       );

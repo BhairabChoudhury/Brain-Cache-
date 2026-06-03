@@ -3,6 +3,7 @@ import { FiUpload, FiFileText, FiImage, FiCheckCircle, FiX } from 'react-icons/f
 import { BsStars } from 'react-icons/bs';
 import axios from 'axios'; 
 import { useContent } from '../Context/ContentProvider';
+import { BACKEND_URL } from '../config';
 
 export default function Upload() {
   const { setNotes } = useContent();
@@ -62,7 +63,7 @@ export default function Upload() {
         formData.append('file', file);
       });
 
-      const response = await axios.post('http://localhost:8000/api/content/create', formData, {
+      const response = await axios.post(`${BACKEND_URL}/api/content/create`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
