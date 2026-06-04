@@ -14,10 +14,11 @@ function App() {
     <ContentProvider>
       <BrowserRouter>
         <Routes>
+            <Route element={<Layout />}>
+             <Route path="/" element={<Dashboard />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route element={<Layout />}>
-            <Route path="/" element={<Dashboard />} />
+           
             <Route path="/notes" element={<Notes />} />
             <Route path="/aichat" element={<AiChat />} />
             <Route path="/upload" element={<Upload />} />

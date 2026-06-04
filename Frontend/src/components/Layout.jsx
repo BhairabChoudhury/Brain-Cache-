@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { FiBell, FiGrid, FiSettings, FiFileText, FiMessageSquare, FiUploadCloud, FiLogOut } from 'react-icons/fi';
 import { BiBrain } from 'react-icons/bi';
-
+import { Signin} from '../Pages/Signin.jsx' ; 
+import {Signup} from '../Pages/Signup.jsx' ;
 export const Layout = () => {
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ export const Layout = () => {
 
   const navLinkClasses = ({ isActive }) =>
     `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${isActive
-      ? 'bg-indigo-500/10 text-indigo-400'
+      ? 'bg-black-500/10 text-indigo-400'
       : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
     }`;
 
@@ -78,7 +79,7 @@ export const Layout = () => {
             <FiSettings className="text-lg" />
             <span>Settings</span>
           </div>
-          <div 
+          {/* <div 
             onClick={() => {
               localStorage.removeItem("token");
               navigate("/signin");
@@ -87,7 +88,8 @@ export const Layout = () => {
           >
             <FiLogOut className="text-lg" />
             <span>Sign Out</span>
-          </div>
+          </div> */}  
+          
         </div>
       </aside>
 
