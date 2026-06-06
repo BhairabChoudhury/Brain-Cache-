@@ -5,7 +5,7 @@ import jwt from  "jsonwebtoken" ;
 
 
 export const signup = async (req : Request , res : Response ) =>{ 
-  console.log("hi i am here ghgf ")
+
     try {
   const { username , email , password} = req.body ; 
     if(!username || ! email || !password) {
@@ -17,13 +17,15 @@ export const signup = async (req : Request , res : Response ) =>{
     }
 
     const hashpassword = await bcrypt.hash(password ,10) ; 
-    const newUser = UserModel.create({
+    const newUser = await UserModel.create({
         username , 
         email , 
         password : hashpassword 
     })
     return res.status(201).json({"message" : "User created successfully"}) ;  
-    }catch(err){
+    }
+    
+    catch(err){
    console.log(err) ; 
    return res.status(400).json({"message" : "Internal Server Error "}) ;   
       
@@ -38,7 +40,7 @@ export const signin = async (req : Request , res :  Response ) =>{
       }
        const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Invalid credentials " });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);

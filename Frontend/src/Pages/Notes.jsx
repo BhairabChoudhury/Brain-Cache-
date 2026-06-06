@@ -2,63 +2,7 @@ import React, { useState } from "react";
 import { FiSearch, FiSliders, FiChevronDown, FiGrid, FiList, FiPlus } from "react-icons/fi";
 import { NoteCard } from "../components/NoteCard";
 
-const mockNotes = [
-  {
-    id: 1,
-    title: "The Future of AI-Augmented Knowledge Work",
-    preview: "As AI systems become more capable, the way we interact with information is fundamentally changing. Knowledge...",
-    tags: ["#ai", "#research", "#productivity"],
-    date: "2026-04-17",
-    words: "847 words",
-    icon: "🧠",
-    pinned: true
-  },
-  {
-    id: 2,
-    title: "Product Roadmap Q2 2026 — Meeting Notes",
-    preview: "Attendees: Alex, Sarah, Marcus, Priya Key decisions: - Ship AI chat feature by May 15 - Delay mobile app to Q3 (resource...",
-    tags: ["#work"],
-    date: "2026-04-16",
-    words: "298 words",
-    icon: "📋"
-  },
-  {
-    id: 3,
-    title: "React Performance Optimization Patterns",
-    preview: "Key patterns for high-performance React applications: Memoization: Use React.memo, useMemo, and useCallback...",
-    tags: ["#coding", "#learning"],
-    date: "2026-04-14",
-    words: "634 words",
-    icon: "⚡"
-  },
-  {
-    id: 4,
-    title: "Personal OKRs — Q2 2026",
-    preview: "Objective 1: Ship something I'm proud of - KR1: Launch Second Brain portfolio project ✓ (in progress) - KR2: Write 4...",
-    tags: ["#personal"],
-    date: "2026-04-14",
-    words: "156 words",
-    icon: "🎯"
-  },
-  {
-    id: 5,
-    title: "Building a Second Brain: Core Principles",
-    preview: "The PARA method (Projects, Areas, Resources, Archives) provides a flexible organizational structure that works acros...",
-    tags: ["#productivity", "#learning"],
-    date: "2026-04-13",
-    words: "412 words",
-    icon: "📚"
-  },
-  {
-    id: 6,
-    title: "Side Project Ideas — Braindump",
-    preview: "Things I want to build: 1. AI code reviewer: Upload PRs, get AI feedback that learns your codebase conventions 2. Meeting...",
-    tags: ["#ideas", "#coding"],
-    date: "2026-04-11",
-    words: "178 words",
-    icon: "💡"
-  }
-];
+
 
 export const Notes = () => {
   const [searchQuery, setSearchQuery] = useState("");

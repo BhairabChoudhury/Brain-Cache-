@@ -3,7 +3,6 @@ import ChatSessionModel from "../Models/ChatSession";
 import { searchEmbedding } from "../Ai/SearchEm";
 import ContentModel from "../Models/ContentModel";
 import { generateAnswer } from "../Ai/GenerateAnswer";
-import { success } from "zod";
 
 // Create a new blank chat session
 export const createSession = async (req: Request, res: Response) => {

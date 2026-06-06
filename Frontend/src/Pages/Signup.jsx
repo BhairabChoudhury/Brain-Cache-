@@ -17,6 +17,7 @@ const Signup = () => {
        setError('') ; 
         if( ! name || !email || !password) {
             setError('All  fields  required') 
+            return;
         }
 
         setLoading(true) ; 
@@ -27,15 +28,15 @@ const Signup = () => {
         password: password
       })
       console.log(response.data)
+      setName("")
+      setEmail("")
+      setPassword("") 
       navigate('/signin')
     } catch (err) {
       console.error(err)
       setError(err.response?.data?.message || "Signup failed. Please try again.")
     } finally {
       setLoading(false) 
-      setName("")
-      setEmail("")
-      setPassword("") 
     }
      }
   return (
@@ -55,6 +56,7 @@ const Signup = () => {
             <FaUser className='absolute left-3 top-1/2 -translate-y-1/2 text-white/60' />
             <input
               onChange={(e) => setName(e.target.value)}
+              value={name}
               type="text"
               placeholder='Full Name'
               className='w-full bg-white/10 border border-white/20 text-white placeholder-white/60 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all'
@@ -65,6 +67,7 @@ const Signup = () => {
             <FaEnvelope className='absolute left-3 top-1/2 -translate-y-1/2 text-white/60' />
             <input
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
               type="email"
               placeholder='Email Address'
               className='w-full bg-white/10 border border-white/20 text-white placeholder-white/60 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all'
@@ -75,6 +78,7 @@ const Signup = () => {
             <FaLock className='absolute left-3 top-1/2 -translate-y-1/2 text-white/60' />
             <input
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
               type="password"
               placeholder='Password'
               className='w-full bg-white/10 border border-white/20 text-white placeholder-white/60 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all'

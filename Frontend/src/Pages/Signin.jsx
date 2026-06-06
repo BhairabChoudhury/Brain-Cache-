@@ -4,16 +4,22 @@ import axios  from "axios" ;
 import { FaEnvelope, FaLock } from 'react-icons/fa'
 import { CgSpinner } from 'react-icons/cg'
 import { BACKEND_URL } from '../config'
+import { useContent } from '../Context/ContentProvider'
 
 const Signin  = () =>{
      const  navigate = useNavigate(); 
-     const [email , setEmail] = useState() ; 
-     const [password , setPassword] = useState() ; 
+     const { fetchContent } = useContent();
+     const [email , setEmail] = useState("") ; 
+     const [password , setPassword] = useState("") ; 
      const [loading , setLoading] = useState(false) ; 
      const [error , setError] = useState('') ;  
       const handleSignin = async (e) => {
         e.preventDefault();
         setError("");
+        if (!email || !password) {
+            setError("All fields are required");
+            return;
+        }
         setLoading(true);
         try {
             const response = await axios.post(`${BACKEND_URL}/api/auth/signin`, {
@@ -22,15 +28,16 @@ const Signin  = () =>{
             });
             if (response.data.token) {
                 localStorage.setItem("token", response.data.token);
-                navigate("/dashboard");
+                setEmail("");
+                setPassword("");
+                await fetchContent();
+                navigate("/");
             }
         } catch (error) {
             console.error(error);
             setError(error.response?.data?.message || "Login failed. Please try again.");
         } finally {
             setLoading(false);
-            setEmail("");
-            setPassword("");
         }
       }
 
@@ -51,6 +58,7 @@ const Signin  = () =>{
                         <FaEnvelope className='absolute left-3 top-1/2 -translate-y-1/2 text-white/60' />
                         <input
                             onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             type="email"
                             placeholder='Email Address'
                             className='w-full bg-white/10 border border-white/20 text-white placeholder-white/60 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all'
@@ -61,6 +69,7 @@ const Signin  = () =>{
                         <FaLock className='absolute left-3 top-1/2 -translate-y-1/2 text-white/60' />
                         <input
                             onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                             type="password"
                             placeholder='Password'
                             className='w-full bg-white/10 border border-white/20 text-white placeholder-white/60 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all'

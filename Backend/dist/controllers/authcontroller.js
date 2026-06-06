@@ -17,7 +17,6 @@ const UserModel_1 = __importDefault(require("../Models/UserModel"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("hi i am here ghgf ");
     try {
         const { username, email, password } = req.body;
         if (!username || !email || !password) {
@@ -28,7 +27,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(400).json({ "message": "User already exist" });
         }
         const hashpassword = yield bcrypt_1.default.hash(password, 10);
-        const newUser = UserModel_1.default.create({
+        const newUser = yield UserModel_1.default.create({
             username,
             email,
             password: hashpassword
@@ -49,7 +48,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const user = yield UserModel_1.default.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).json({ message: "Invalid credentials " });
         }
         const isMatch = yield bcrypt_1.default.compare(password, user.password);
         if (!isMatch) {

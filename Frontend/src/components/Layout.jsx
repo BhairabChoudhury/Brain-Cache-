@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { FiBell, FiGrid, FiSettings, FiFileText, FiMessageSquare, FiUploadCloud, FiLogOut } from 'react-icons/fi';
 import { BiBrain } from 'react-icons/bi';
 import { Signin} from '../Pages/Signin.jsx' ; 
 import {Signup} from '../Pages/Signup.jsx' ;
 export const Layout = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/signin");
-    }
-  }, [navigate]);
+  const location = useLocation();
 
   const navLinkClasses = ({ isActive }) =>
     `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${isActive
@@ -79,17 +73,15 @@ export const Layout = () => {
             <FiSettings className="text-lg" />
             <span>Settings</span>
           </div>
-          {/* <div 
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/signin");
-            }}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-400 font-medium cursor-pointer hover:text-red-300 hover:bg-red-500/10"
-          >
-            <FiLogOut className="text-lg" />
-            <span>Sign Out</span>
-          </div> */}  
+            <NavLink to="/signin" className={navLinkClasses}>
+            <FiFileText className="text-lg" />
+            <span>Signin</span>
+          </NavLink> 
           
+          <NavLink to="/signup" className={navLinkClasses}>
+            <FiFileText className="text-lg" />
+            <span>Signup</span>
+          </NavLink>
         </div>
       </aside>
 
