@@ -10,5 +10,4 @@ export const searchEmbedding = async (query : string ) =>{
 });
 console.log(results.ids?.[0] || [] ) ;
 return results.ids?.[0] || [] ; 
-
 } ; 

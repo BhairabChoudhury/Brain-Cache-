@@ -35,7 +35,6 @@ export const createContent = async (req: Request, res: Response) => {
 export const getAllContent = async (req: Request, res: Response) => {
   try {
     const userId = (req as any).userId;
-
     const contents = await contentService.getAllContent(userId);
 
     res.status(200).json({
@@ -53,7 +52,7 @@ export const getAllContent = async (req: Request, res: Response) => {
 //  Delete Content
 export const deleteContent = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const {id} = req.params;
 
     await contentService.deleteContent(id as string); //   
 
@@ -61,7 +60,8 @@ export const deleteContent = async (req: Request, res: Response) => {
       success: true,
       message: "Content deleted successfully"
     });
-  } catch (error: any) {
+  }
+   catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message

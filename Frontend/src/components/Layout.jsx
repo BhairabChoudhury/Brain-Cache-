@@ -94,12 +94,7 @@ export const Layout = () => {
               <FiBell className="text-xl" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-indigo-500 rounded-full border-2 border-[#0a0a0c]"></span>
             </button>
-            <div className="h-8 w-px bg-white/10"></div>
-            <div className="flex items-center gap-3 cursor-pointer group">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-md group-hover:shadow-lg transition-all duration-200">
-                BC
-              </div>
-            </div>
+            {/* <div className="h-8 w-px bg-white/10"></div> */}
           </div>
         </header>
 

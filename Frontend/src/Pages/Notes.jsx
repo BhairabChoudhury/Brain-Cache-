@@ -63,9 +63,9 @@ export const Notes = () => {
 
       {/* Notes Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {mockNotes.map(note => (
+        {/* {mockNotes.map(note => (
           <NoteCard key={note.id} note={note} />
-        ))}
+        ))} */}
       </div>
     </div>
   );
