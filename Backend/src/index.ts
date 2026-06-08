@@ -20,6 +20,9 @@ app.use(
 app.use(express.json()) ;
 connectDB() ; 
 console.log("App is running") ; 
+app.get("/health", (req, res) => {
+  res.json({ status: "healthy" });
+});
 app.use("/api/auth/",authroutes) ; 
 app.use("/api/content/",contentroutes) ; 
 app.use("/api/search/",searchRoute) ; 

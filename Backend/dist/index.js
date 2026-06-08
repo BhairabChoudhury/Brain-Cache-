@@ -20,6 +20,9 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json());
 (0, db_1.default)();
 console.log("App is running");
+app.get("/health", (req, res) => {
+    res.json({ status: "healthy" });
+});
 app.use("/api/auth/", authroutes_1.default);
 app.use("/api/content/", contentroutes_1.default);
 app.use("/api/search/", searchRoute_1.default);
