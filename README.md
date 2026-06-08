@@ -1,4 +1,4 @@
-# 🧠 Brain-Cache AI — Second Brain
+# 🧠 Brain-Cache AI 
 
 An AI-powered personal knowledge management system (PKMS) that serves as your digital "Second Brain." It allows users to store, organize, search, and dynamically chat with their notes, links, PDFs, and images using semantic search, vector embeddings, and LLM text generation.
 
