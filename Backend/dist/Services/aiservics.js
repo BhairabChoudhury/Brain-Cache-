@@ -11,7 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.collection = void 0;
 const chromadb_1 = require("chromadb");
-const client = new chromadb_1.ChromaClient();
+const client = new chromadb_1.ChromaClient({
+    host: process.env.CHROMA_HOST || "localhost",
+    port: process.env.CHROMA_PORT ? parseInt(process.env.CHROMA_PORT, 10) : 8000
+});
 const COLLECTION_NAME = "second_brain";
 const collection = () => __awaiter(void 0, void 0, void 0, function* () {
     return yield client.getOrCreateCollection({ name: COLLECTION_NAME });
