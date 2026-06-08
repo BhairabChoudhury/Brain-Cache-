@@ -6,11 +6,22 @@ import  {useContent} from "../Context/ContentProvider"
 
 export const Notes = () => {
   const [searchQuery, setSearchQuery] = useState("");
-      const {notes} = useContent() ;
+      const {notes} = useContent() ;  
 
-      useEffect(() => {
-            
-      })
+      const Allnotes      =  [ ...notes] ; 
+
+      const  SerachContent =  async (query)=>{
+        try{
+          const res = await axios.get(`${BACKEND_URL}/api/search/searchNote?query=${query}` , {
+            headers : {
+              Authorization : `Bearer ${localStorage.getItem("token")}`
+            }
+          })
+        }
+        catch(err){
+          console.log(err) ; 
+        }
+      }
       
   return (
     <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-10">
@@ -36,7 +47,7 @@ export const Notes = () => {
                 type="text" 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search notes by title, content, or tag..." 
+                placeholder="Search data by title, content, or tag..." 
                 className="w-full bg-[#16161a] border border-white/[0.04] text-slate-200 placeholder-slate-500 rounded-xl pl-12 pr-4 py-3.5 outline-none focus:border-indigo-500/50 transition-colors" 
               />
           </div>
@@ -54,7 +65,7 @@ export const Notes = () => {
                       <FiList />
                   </button>
               </div>
-          </div>
+          </div>  
       </div>
 
       {/* Tags */}
@@ -66,11 +77,11 @@ export const Notes = () => {
           ))}
       </div>
 
-      {/* Notes Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {/* {mockNotes.map(note => (
-          <NoteCard key={note.id} note={note} />
-        ))} */}
+        {/* Notes Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {Allnotes.map(note => (
+               <NoteCard key={note.id} note={note} />
+        ))} 
       </div>
     </div>
   );
