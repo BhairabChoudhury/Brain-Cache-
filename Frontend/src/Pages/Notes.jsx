@@ -8,7 +8,7 @@ export const Notes = () => {
   const [searchQuery, setSearchQuery] = useState("");
       const {notes} = useContent() ;  
 
-      const Allnotes      =  [ ...notes] ; 
+      const Allnotes   =  [ ...notes] ; 
 
       const  SerachContent =  async (query)=>{
         try{
@@ -17,6 +17,8 @@ export const Notes = () => {
               Authorization : `Bearer ${localStorage.getItem("token")}`
             }
           })
+
+          return res.data.data  ; 
         }
         catch(err){
           console.log(err) ; 
@@ -68,14 +70,7 @@ export const Notes = () => {
           </div>  
       </div>
 
-      {/* Tags */}
-      <div className="flex gap-3 flex-wrap mb-4">
-          {['All', '# ai', '# research', '# productivity', '# design', '# coding', '# ideas', '# personal', '# learning', '# work', '# psychology'].map(tag => (
-              <button key={tag} className={`px-5 py-2 rounded-full text-[13px] font-medium transition-colors cursor-pointer ${tag === 'All' ? 'bg-[#9333ea] text-white' : 'bg-[#16161a] border border-white/[0.04] text-slate-400 hover:bg-white/10 hover:text-slate-200'}`}>
-                  {tag}
-              </button>
-          ))}
-      </div>
+  
 
         {/* Notes Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
