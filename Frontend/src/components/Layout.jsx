@@ -94,10 +94,9 @@ export const Layout = () => {
               <FiBell className="text-xl" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-indigo-500 rounded-full border-2 border-[#0a0a0c]"></span>
             </button>
-            {/* <div className="h-8 w-px bg-white/10"></div> */}
+            <div className="h-8 w-px bg-white/10"></div>
           </div>
         </header>
-
         {/* Scrollable Area for Pages */}
         <div className="p-8 overflow-y-auto flex-1 custom-scrollbar">
            <Outlet />

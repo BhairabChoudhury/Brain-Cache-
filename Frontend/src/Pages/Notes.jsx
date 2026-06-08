@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { FiSearch, FiSliders, FiChevronDown, FiGrid, FiList, FiPlus } from "react-icons/fi";
 import { NoteCard } from "../components/NoteCard";
-
+import  {useContent} from "../Context/ContentProvider" 
 
 
 export const Notes = () => {
   const [searchQuery, setSearchQuery] = useState("");
+      const {notes} = useContent() ;
 
+      useEffect(() => {
+            
+      })
+      
   return (
     <div className="max-w-[1400px] mx-auto flex flex-col gap-6 pb-10">
       {/* Notes Header */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex flex-col">
           <h2 className="text-3xl font-bold text-slate-100 mb-1">
-            Notes
+            Notes 
           </h2>
-          <span className="text-slate-500 text-[15px]">13 notes in your brain</span>
+          <span className="text-slate-500 text-[15px]">{ notes.length } notes in your brain</span>
         </div>
         <button className="bg-[#9333ea] hover:bg-purple-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(147,51,234,0.3)] cursor-pointer">
           <FiPlus className="text-lg" />
