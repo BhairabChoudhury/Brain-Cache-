@@ -27,7 +27,7 @@ Chat session powered by Gemini AI and ChromaDB semantic search. It queries your 
 - **📄 PDF Text Extraction**: Automatic PDF uploading and text parsing using `pdf-parse`.
 - **🖼️ Image OCR processing**: Extract text from images using local `Tesseract.js` integration.
 - **🔍 Semantic Vector Search**: High-performance semantic query matching powered by ChromaDB.
-- **🤖 Retrieval-Augmented Generation (RAG)**: Chat with your second brain! Query the AI, and it will fetch context from your saved documents to give accurate, personalized answers.
+- **🤖 Retrieval-Augmented Generation (RAG)**: Chat with your brain Cache ! Query the AI, and it will fetch context from your saved documents to give accurate, personalized answers.
 - **🔐 JWT Authentication**: Secure, session-based user authentication.
 - **👤 Multi-User Isolation**: Complete data separation between different user accounts.
 
