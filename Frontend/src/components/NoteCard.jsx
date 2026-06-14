@@ -21,7 +21,7 @@ export function NoteCard({ note }) {
                 setNotes((prevNotes) => prevNotes.filter((n) => n !== note));
                 return;
             }
-
+            
             const response = await axios.delete(`${BACKEND_URL}/api/content/delete/${noteId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
