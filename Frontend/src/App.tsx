@@ -4,8 +4,8 @@ import { Dashboard } from './Pages/Dashboard/Dashboard';
 import { Notes } from './Pages/Notes';
 import AiChat from './Pages/AiChat';
 import Upload from './Pages/Upload';
-import { Signin } from './Pages/Signin';
-import { Signup } from './Pages/Signup';
+// import { Signin } from './Pages/Signin';
+// import { Signup } from './Pages/Signup';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ContentProvider from './Context/ContentProvider';
 
