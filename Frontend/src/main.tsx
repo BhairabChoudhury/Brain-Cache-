@@ -7,9 +7,7 @@ import ContentProvider from './Context/ContentProvider';
 createRoot(document.getElementById('root')!).render( 
    <StrictMode>  
    <BrowserRouter>
-   <ContentProvider>
-    <App />
-   </ContentProvider>
+    <App /> 
   </BrowserRouter> 
   </StrictMode>
 )
