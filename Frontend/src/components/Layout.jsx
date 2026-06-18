@@ -88,7 +88,7 @@ export const Layout = () => {
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Header */}
-        <header className="h-[72px] px-8 flex items-center justify-end border-b border-white/5 bg-[#0a0a0c]/80 backdrop-blur-md z-10 sticky top-0">
+        <header className=" px-8 flex items-center justify-end border-b border-white/5 bg-[#0a0a0c]/80 backdrop-blur-md z-10 sticky top-0">
           <div className="flex items-center gap-5 ml-4">
             <button className="relative text-slate-400 hover:text-slate-200 transition-colors p-2 rounded-full hover:bg-white/5 cursor-pointer">
               <FiBell className="text-xl" />
