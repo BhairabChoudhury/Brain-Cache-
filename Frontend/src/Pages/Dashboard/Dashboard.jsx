@@ -49,7 +49,6 @@ console.log("Recent Notes:", recentNotes);
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       });    
-
       if (response.data && response.data.success) {
         alert('Note successfully uploaded to the backend!');
         setCaptureTitle('');
@@ -152,8 +151,6 @@ console.log("Recent Notes:", recentNotes);
         </section>
 
       </div>
-
-
 
     </div>
   );
