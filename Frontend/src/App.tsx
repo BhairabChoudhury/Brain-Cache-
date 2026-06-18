@@ -14,8 +14,8 @@ function App() {
     <ContentProvider>
       <BrowserRouter>
         <Routes>
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
+            {/* <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} /> */}
             <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/notes" element={<Notes />}/>
