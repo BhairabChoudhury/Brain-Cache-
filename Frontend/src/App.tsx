@@ -7,10 +7,11 @@ import Upload from './Pages/Upload';
 import { Signin } from './Pages/Signin';
 import { Signup } from './Pages/Signup';
 import {  Routes, Route } from 'react-router-dom';
+import ContentProvider from './Context/ContentProvider';
 
 function App() { 
   return (
-
+    <ContentProvider>
         <Routes>
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
@@ -21,7 +22,7 @@ function App() {
             <Route path="/upload" element={<Upload/>} />
           </Route>
         </Routes>
-
+    </ContentProvider>
   )
 } 
 

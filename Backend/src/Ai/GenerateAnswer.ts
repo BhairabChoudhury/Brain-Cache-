@@ -7,9 +7,7 @@ export const generateAnswer = async (context: string, query: string) => {
 
   const prompt = `
 You are an AI assistant for a personal knowledge base.
-
 Use only the provided context to answer the user's question.
-
 If the answer is not present in the context, clearly state that the information was not found.
 
   Context:
