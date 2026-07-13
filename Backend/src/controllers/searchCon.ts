@@ -39,8 +39,7 @@ export const searchContentForAiAnswer = async ( req: Request , res : Response) =
       
 }
 
-//  searching   for  Note from  title and content  using   regex  in  mogo db data base 
-
+// searching   for  Note from  title and content  using   regex  in  mogo db data base 
 export const searchNote = async  ( req :  Request , res : Response) =>{
      try{
        const userId = (req as any ).userId ;   

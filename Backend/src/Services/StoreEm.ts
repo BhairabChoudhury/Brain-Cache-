@@ -7,7 +7,7 @@ export const  storeEmbedding = async (contentId : string , text:string ) =>{
     await COLLECTION.add({
       ids: [contentId],
       documents: [text], // Chroma auto-embedding
-      metadatas: [{ source: "second_brain" }] // Added metadata to avoid null
+      metadatas: [{ source: "brain_Cache" }] // Added metadata to avoid null
     });
     const result = await COLLECTION.get({
       include: ["embeddings", "documents", "metadatas"] as any // Request embeddings
@@ -21,4 +21,5 @@ export const  storeEmbedding = async (contentId : string , text:string ) =>{
 } 
 /*
 docker run -p 8000:8000 -v ./chroma-db:/data chromadb/chroma
+
 */

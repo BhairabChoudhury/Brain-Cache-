@@ -4,7 +4,7 @@ import { extractTextFromPDF } from "../utils/pdf";
 import { extractTextFromImage } from "../utils/orc";
 import { storeEmbedding } from "./StoreEm"; 
 
-//  Mock Chroma function (you will replace later)
+//  Chroma function (you will replace later)
 const addToVectorDB = async (text: string, contentId: string) => {
   // send text + id to Chroma
   await storeEmbedding(contentId, text) ;
@@ -20,7 +20,7 @@ interface CreateContentInput { // model of data which i recive from controller
   userId: string;
 }
 
-//  CREATE CONTENT
+// CREATE CONTENT
 export const createContent = async (data: CreateContentInput) => {
   const { title, type, url, content ,  file, userId } = data;
 
@@ -76,13 +76,13 @@ export const createContent = async (data: CreateContentInput) => {
 
   // Send to Vector DB (Chroma)
   if (extractedText) {
-    await addToVectorDB(extractedText, String(newContent._id)); //  send  text and id  of contend to vector db  (converts MongoDB ObjectId → string)
+    await addToVectorDB(extractedText, String(newContent._id)); // send  text and id  of contend to vector db  (converts MongoDB ObjectId → string)
   }
 
   return newContent;
 };
 
-//  GET ALL CONTENT
+// GET ALL CONTENT
 export const getAllContent = async (userId: string) => {
   return await ContentModel.find({ userId }).sort({ createdAt: -1 });
 };

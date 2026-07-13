@@ -14,7 +14,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://brain-cache-mu.vercel.app/",
   process.env.FRONTEND_URL
-].filter(Boolean) as string[];
+].filter(Boolean) as string[] ;
 
 app.use(
   cors({
@@ -29,7 +29,7 @@ console.log("App is running") ;
 app.get("/health", (req, res) => {
   res.json({ status: "healthy" });
 });
-app.use("/api/auth/",authroutes) ; 
+app.use("/api/auth/",authroutes) ;  // Route Handler
 app.use("/api/content/",contentroutes) ; 
 app.use("/api/search/",searchRoute) ; 
 app.use("/api/chat/",chatRoutes);
