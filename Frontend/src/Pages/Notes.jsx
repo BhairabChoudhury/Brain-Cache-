@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { FiSearch, FiSliders, FiChevronDown, FiGrid, FiList, FiPlus } from "react-icons/fi";
 import { NoteCard } from "../components/NoteCard";
-import  {useContent} from "../Context/ContentProvider" 
+import { useContent } from "../Context/ContentProvider";
+import { BACKEND_URL } from "../config";
 
 
 export const Notes = () => {
