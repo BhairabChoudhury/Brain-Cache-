@@ -316,7 +316,7 @@ export default function AiChat() {
           </div>
         </div>
 
-        {/* Chat Messages Log Area */}
+        {/* Chat Messages Log Area here */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
           
           {!currentSession || currentSession.messages.length === 0 ? (
